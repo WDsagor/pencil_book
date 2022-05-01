@@ -1,0 +1,10 @@
+.footer{
+    padding: 10px 0;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.footer span{
+    color: orange;
+}

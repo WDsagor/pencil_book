@@ -1,0 +1,15 @@
+.nav-link{
+    text-decoration: none;
+    color: rgb(14, 145, 108);
+    padding: 5px 15px;
+    margin-right: 10px;
+    font-weight:600;
+}
+.active-link{
+    text-decoration: none;
+    color:white;
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-weight:600;
+
+}
