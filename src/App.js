@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
@@ -10,14 +12,21 @@ import RequirAuth from "./Components/RequirAuth/RequirAuth";
 
 function App() {
   return (
+    
     <div className="App">
+      <ToastContainer/>
       <Header className="header"></Header>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/inventory" element={<RequirAuth>
+        <Route
+          path="/inventory"
+          element={
+            <RequirAuth>
               <Inventory></Inventory>
-            </RequirAuth>}></Route>
+            </RequirAuth>
+          }
+        ></Route>
         <Route
           path="/inventory/:id"
           element={

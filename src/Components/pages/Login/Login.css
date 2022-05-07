@@ -1,8 +1,8 @@
 .login-page{
     color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:50px;
 }
 .login-page .login-area{
     margin: auto;
