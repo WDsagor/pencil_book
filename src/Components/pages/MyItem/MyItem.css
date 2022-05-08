@@ -1,0 +1,76 @@
+.items {
+    margin: 50px 0;
+}
+
+.items h2 {
+    text-align: center;
+    color: white;
+    margin: 30px 0;
+}
+
+.items table td img {
+    width: 50px;
+    height: 100%;
+    object-fit: cover;
+    justify-self: center;
+}
+
+.items table {
+    margin: auto;
+    width: 85%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.items tr {
+    background: rgba(5, 104, 118, 0.348);
+}
+
+.items th {
+    background: rgb(5, 83, 90);
+    color: white;
+    font-weight: 500;
+}
+
+.items td,
+.items th {
+    padding: 6px;
+    border: 1px solid rgb(16, 125, 125);
+    text-align: center;
+}
+
+.items tbody td .deleteBtn {
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background: rgba(5, 104, 118, 0.9);
+
+}
+
+.items tbody td .deleteBtn:hover {
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    background: rgba(5, 182, 205, 0.9);
+
+}
+.items tbody td .updateBtn {
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    background: rgba(5, 104, 118, 0.9);
+
+}
+
+.items tbody td .updateBtn:hover {
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    background: rgba(5, 182, 205, 0.9);
+
+}

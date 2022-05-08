@@ -1,15 +1,17 @@
-import React from 'react';
+import React from "react";
 
-const AllItems = ({item}) => {
-    const {name, quantity, price, made, url} = item
-    console.log(item);
-    return (
-        <div>
-            <img src={url} alt="" srcset="" />
-            <h3>{name}</h3>
-            <p>Made : {made}</p>
-        </div>
-    );
+const AllItems = ({ item }) => {
+  const { name, quantity, price, made, url } = item;
+  console.log(item);
+  return (
+    <tr>
+      <td><img src={url} alt="" /></td>
+      <td>{name}</td>
+      <td>{quantity}</td>
+      <td>{price}</td>
+      <td>{made}</td>
+    </tr>
+  );
 };
 
 export default AllItems;

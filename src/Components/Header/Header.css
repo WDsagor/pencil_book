@@ -18,9 +18,10 @@
     height: 100%;
     object-fit: cover;
 }
-.nav-item{
-    margin-right: min(100px);
+.hide-item{
+    margin-right: 100px;
 }
+
 
 
 
@@ -49,6 +50,7 @@
     }
     .hide-item{
         display: none;
+        margin-right: 100px;
     }
     .logo{
         margin-left:(50px);

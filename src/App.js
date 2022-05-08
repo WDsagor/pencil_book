@@ -5,8 +5,10 @@ import "./App.css";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import Home from "./Components/pages/Home/Home";
+import AddItem from "./Components/pages/Inventory/AddItem/AddItem";
 import Inventory from "./Components/pages/Inventory/Inventory";
 import Login from "./Components/pages/Login/Login";
+import MyItem from "./Components/pages/MyItem/MyItem";
 import Signup from "./Components/pages/Signup/Signup";
 import RequirAuth from "./Components/RequirAuth/RequirAuth";
 
@@ -36,17 +38,33 @@ function App() {
           }
         ></Route>
         <Route
-          path="/addProducts"
+          path="/addItem"
           element={
             <RequirAuth>
-              <Inventory></Inventory>
+              <AddItem></AddItem>
+            </RequirAuth>
+          }
+        ></Route>
+        <Route
+          path="/myItem"
+          element={
+            <RequirAuth>
+              <MyItem></MyItem>
+            </RequirAuth>
+          }
+        ></Route>
+        <Route
+          path="/myitem/:id"
+          element={
+            <RequirAuth>
+              <AddItem></AddItem>
             </RequirAuth>
           }
         ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
       </Routes>
-      <Footer></Footer>
+      <Footer className='foorer'></Footer>
     </div>
   );
 }

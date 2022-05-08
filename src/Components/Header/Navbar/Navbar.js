@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink,} from "react-router-dom";
 import auth from "../../../firebase.init";
 import "./Navbar.css";
 
@@ -18,34 +18,45 @@ const Navbar = () => {
         className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
         to="/"
       >
-        Home
+        HOME
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
         to="/inventory"
       >
-        Inventory
+        INVENTORY
       </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
-        to="/dashboard"
-      >
-        Dashboard
-      </NavLink>
-      {user ? (
-        <NavLink
+      {
+        user && <>
+         <NavLink
+          className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
+          to="/addItem"
+        >
+          ADD ITEM 
+        </NavLink>
+         <NavLink
+          className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
+          to="/myItem"
+        >
+          MY ITEM
+        </NavLink>
+        
+        </>
+      }
+      {user ?
+      ( <NavLink
           onClick={() => handleSignOut()}
           className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
           to="/login"
         >
-          Sign Out
+          LOG OUT
         </NavLink>
       ) : (
         <NavLink
           className={({ isActive }) => (isActive ? "active-link" : "nav-link")}
           to="/Login"
         >
-          Login
+          LOGIN 
         </NavLink>
       )}
     </nav>
