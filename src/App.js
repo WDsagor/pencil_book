@@ -10,6 +10,7 @@ import Inventory from "./Components/pages/Inventory/Inventory";
 import Login from "./Components/pages/Login/Login";
 import MyItem from "./Components/pages/MyItem/MyItem";
 import Signup from "./Components/pages/Signup/Signup";
+import UpdateItem from "./Components/pages/UpdateItem/UpdateItem";
 import RequirAuth from "./Components/RequirAuth/RequirAuth";
 
 function App() {
@@ -54,10 +55,10 @@ function App() {
           }
         ></Route>
         <Route
-          path="/myitem/:id"
+          path="/update/:id"
           element={
             <RequirAuth>
-              <AddItem></AddItem>
+              <UpdateItem></UpdateItem>
             </RequirAuth>
           }
         ></Route>

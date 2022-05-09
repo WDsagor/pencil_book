@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import AllItem from "../../../useHooks/useHooks";
 import "./MyItem.css";
+import { useNavigate } from "react-router-dom";
 
 const MyItem = () => {
   const [items, setItems] = AllItem();
+  const naviget = useNavigate()
 
 const deleteItem = id =>{
   const confirm = window.confirm("Are you sure to delete this item ?")
@@ -24,7 +26,11 @@ const deleteItem = id =>{
       setItems(remainItem);
     })()
   }
-}  
+} 
+const itemUpdate = id =>{
+  naviget(`/update/${id}`)
+
+} 
   return (
     <div className="items">
       <h2>Manage your item</h2>

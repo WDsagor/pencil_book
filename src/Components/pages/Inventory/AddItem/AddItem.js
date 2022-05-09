@@ -13,7 +13,7 @@ const AddItem = () => {
       quantity: event.target.quantity.value,
       url: event.target.url.value,
     };
-    console.log(items);
+    // console.log(items);
 
     try {
       const { data } = await axios.post("http://localhost:5000/inventory", items);
