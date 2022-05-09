@@ -16,7 +16,7 @@ const AddItem = () => {
     // console.log(items);
 
     try {
-      const { data } = await axios.post("http://localhost:5000/inventory", items);
+      const { data } = await axios.post("https://stark-dusk-04607.herokuapp.com/inventory", items);
 
       if (!data.success) {
         return toast.error(data.error, {

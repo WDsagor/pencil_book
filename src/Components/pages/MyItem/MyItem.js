@@ -13,7 +13,7 @@ const deleteItem = id =>{
   const confirm = window.confirm("Are you sure to delete this item ?")
   if(confirm){
     (async () => {
-      const { data } = await axios.delete(`http://localhost:5000/inventory/${id}`);
+      const { data } = await axios.delete(`https://stark-dusk-04607.herokuapp.com/inventory${id}`);
       
       if(!data.success) return toast.error(data.error, {
         position: toast.POSITION.TOP_CENTER

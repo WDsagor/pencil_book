@@ -10,36 +10,41 @@ import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   if (user) {
     navigate(from, { replace: true });
-    
   }
 
   if (loading) {
     return <Loading></Loading>;
   }
-  
+
   const handelLogin = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     if (error) {
-      return toast (`${error.message}`,{
-      position: toast.POSITION.TOP_CENTER
-    })
-    }else{
-      await signInWithEmailAndPassword (email, password);
-      toast.success("Login Success", {
-        position: toast.POSITION.TOP_CENTER
+      return toast.error(`${error.code}`, {
+        position: toast.POSITION.TOP_CENTER,
       });
       
     }
+    
+    if(!error){
+      if (email !== "" && password !== "") {
+        await signInWithEmailAndPassword(email, password);
+        toast.success("Login Success", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
   
+    }
+    
     event.target.reset();
   };
 

@@ -10,7 +10,7 @@ const UpdateItem = () => {
 
   useEffect(() => {
     // setLoading(true);
-    const url = `http://localhost:5000/inventory/${id}`;
+    const url = `https://stark-dusk-04607.herokuapp.com/inventory${id}`;
     console.log(url);
     fetch(url)
       .then((res) => res.json())
