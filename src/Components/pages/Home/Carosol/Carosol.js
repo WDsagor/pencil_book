@@ -1,47 +1,35 @@
-import { Carousel } from '@sefailyasoz/react-carousel';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import img1 from "../../../../asset/images/img1.jpg"
+import img2 from "../../../../asset/images/img2.jpg"
+import img3 from "../../../../asset/images/img3.jpg"
+import './Carosol.css'
+
+
 
 const Carosol = () => {
-    const CarouselData = [
-        {
-          headerText: null,
-          subText: 'Sub Text One',
-          image: 'https://picsum.photos/300/300',
-        },
-        {
-          headerText: 'Header Text Two',
-          subText: null,
-          image: 'https://picsum.photos/1200/800',
-        },
-        {
-          headerText: null,
-          subText: null,
-          image: 'https://picsum.photos/720/720',
-        },
-        {
-          headerText: 'Header Text Four',
-          subText: 'Sub Text Four',
-          image: 'https://picsum.photos/1920/1080',
-        },
-        {
-          headerText: 'Header Text Five',
-          subText: 'Sub Text Five',
-          image: 'https://picsum.photos/480/360',
-        },
-      ]
 
-        return <Carousel
-                    data={CarouselData}
-                    autoPlay={true}
-                    rightItem={<FaArrowRight />}
-                    leftItem={<FaArrowLeft />}
-                    animationDuration={3000}
-                    headerTextType="black"
-                    subTextType="white"
-                    size="normal"
-                  />
-     
+
+  return (
+    <div className='carosule-area'>
+      <Carousel>
+                <div>
+                    <img src={img1} alt=""/>
+                    <p className="legend">Legend 1</p>
+                </div>
+                <div>
+                    <img src={img2} alt="" />
+                    <p className="legend">Legend 2</p>
+                </div>
+                <div>
+                    <img src={img3} alt=""/>
+                    <p className="legend">Legend 3</p>
+                </div>
+            </Carousel>
+    </div>
+  )
 };
 
 export default Carosol;
