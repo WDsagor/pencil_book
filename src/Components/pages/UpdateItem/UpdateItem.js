@@ -54,7 +54,7 @@ const UpdateItem = () => {
           <div className="input-fild">
             <label>Quantity</label>
             <input
-              type="text"
+              type="number"
               name="quantity"
               value={item.quantity}
 
@@ -105,7 +105,7 @@ const UpdateItem = () => {
           <div className="input-fild">
             <label> Delivery quantity</label>
             <input
-              type="text"
+              type="number"
               name="quantity"
               placeholder="Enter your delivery quantity"
               required

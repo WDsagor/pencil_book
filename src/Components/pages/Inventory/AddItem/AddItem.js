@@ -52,7 +52,7 @@ const AddItem = () => {
         <div className="input-fild">
           <label>Quantity</label>
           <input
-            type="text"
+            type="number"
             name="quantity"
             placeholder="Enter quantity" required autoComplete="off"
           />
