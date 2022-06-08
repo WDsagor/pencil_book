@@ -22,14 +22,14 @@ const UpdateItem = () => {
       });
   }, [id]);
 
-  const handleUdate = () => {};
+  const handleUpdate = () => {};
   const handleDelivery = () => {};
 
   return (
     <div className="add-area">
       <h1>Update your item</h1>
       <div className="update-area">
-        <form onSubmit={handleUdate} className="add-from">
+        <form onSubmit={handleUpdate} className="add-from">
           <div className="input-fild">
             <label>Item name</label>
             <input

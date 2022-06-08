@@ -4,7 +4,7 @@ import AllItems from "../AllItems/AllItems";
 import './Invetory.css'
 
 const Inventory = () => {
-  const [items, setItems] = AllItem([]);
+  const [items] = AllItem([]);
 
   return (
     <div className="items">

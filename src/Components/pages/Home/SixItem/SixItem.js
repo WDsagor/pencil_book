@@ -2,7 +2,7 @@ import React from "react";
 // import "./SixItem.css";
 
 const SixItem = ({ item }) => {
-  const { name, quantity, price, made, url } = item;
+  const { name, quantity, price, url } = item;
   return (
     <div className="card w-72 sm:w-96 lg:w-80 bg-base-100 shadow-lg">
   <figure className="h-48 w-48 mx-auto"><img className="pt-5"  src={url} alt={name}/></figure>
