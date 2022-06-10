@@ -1,87 +1,135 @@
+import { toast } from "react-toastify";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 import "./UpdateItem.css";
 
 const UpdateItem = () => {
   const [item, setItem] = useState({});
-//   const [loading, setLoading] = useState(false);
+  const [updateItem, setUpdateItem] = useState({});
   const {id}  = useParams();
-//   console.log(id);
+
 
   useEffect(() => {
     // setLoading(true);
     const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
-    console.log(url);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-
-        setItem(data);
-        // setLoading(false);
+        if(!data){
+          return <Loading></Loading>
+        }else{
+          
+          setItem(data);
+          setUpdateItem(data)
+        }
       });
   }, [id]);
+  const handleUpdateName = event =>{
+    const newName = event.target.value;
+    const {name, ...rest}= updateItem;
+    const newItem = {name: newName, ...rest}
+    setUpdateItem(newItem)
+    
+  }
+  const handleUpdateOrigin = event =>{
+    const newMade = event.target.value;
+    const {made, ...rest}= updateItem;
+    const newItem = {made: newMade, ...rest}
+    setUpdateItem(newItem)
+  }
+  const handleUpdateQuantity = event =>{
+    const newQuantity = event.target.value;
+    const {quantity, ...rest}= updateItem;
+    const newItem = {quantity: newQuantity, ...rest}
+    setUpdateItem(newItem)
+  }
+  const handleUpdatePrice = event =>{
+    const newPrice = event.target.value;
+    const {price, ...rest}= updateItem;
+    const newItem = {price: newPrice, ...rest}
+    setUpdateItem(newItem)
+  }
+  const handleUpdateUrl = event =>{
+    const newUrl = event.target.value;
+    const {url, ...rest}= updateItem;
+    const newItem = {url: newUrl, ...rest}
+    setUpdateItem(newItem)
+  }
+const handleUpdate = async(event)=>{
+  event.preventDefault();
+  const {_id}= item;
+  const data = await axios.put(`https://stark-dusk-04607.herokuapp.com/inventory/${_id}`,{updateItem});
+  if(!data.success) return toast.error(data.error, {
+    position: toast.POSITION.TOP_CENTER
+  })
 
-  const handleUpdate = () => {};
+  toast(data.message, {
+    position: toast.POSITION.TOP_CENTER
+  })
+  // console.log(data);
+}
+
   const handleDelivery = () => {};
 
   return (
     <div className="add-area">
-      <h1>Update your item</h1>
+      <h1 className=" text-4xl">Update your item</h1>
       <div className="update-area">
-        <form onSubmit={handleUpdate} className="add-from">
+        <form    className="add-from" onClick={handleUpdate}>
           <div className="input-fild">
             <label>Item name</label>
-            <input
+            <input onChange={handleUpdateName}
               type="text"
               name="name"
-              value={item.name}
+              value={updateItem.name}
               required
-              autoComplete="off"
+      
+        
             />
           </div>
           <div className="input-fild">
             <label>Origin</label>
-            <input
+            <input onChange={handleUpdateOrigin}
               type="text"
               name="origin"
-              value={item.made}
-
+              value={updateItem.made}
               required
-              autoComplete="off"
+
+             
             />
           </div>
           <div className="input-fild">
             <label>Quantity</label>
-            <input
+            <input onChange={handleUpdateQuantity}
               type="number"
               name="quantity"
-              value={item.quantity}
-
+              value={updateItem.quantity}
               required
-              autoComplete="off"
+              
             />
           </div>
           <div className="input-fild">
             <label>Price</label>
-            <input
-              type="text"
+            <input onChange={handleUpdatePrice}
+              type="number"
               name="price"
-              value={item.price}
-
+              value={updateItem.price}
               required
-              autoComplete="off"
+
+              
             />
           </div>
           <div className="input-fild">
             <label>Image url</label>
-            <input
+            <input  onChange={handleUpdateUrl}
               type="url"
               name="url"
-              value={item.url}
-
+              value={updateItem.url}
               required
-              autoComplete="off"
+
+              
             />
           </div>
           <div className="button">
@@ -96,9 +144,6 @@ const UpdateItem = () => {
               type="text"
               name="name"
               value={item.name}
-
-              required
-              autoComplete="off"
             />
           </div>
 
