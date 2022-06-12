@@ -3,16 +3,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
-import "./UpdateItem.css";
 
 const UpdateItem = () => {
+  const [dError, setDError] = useState("")
   const [item, setItem] = useState({});
   const [updateItem, setUpdateItem] = useState({});
   const {id}  = useParams();
 
 
   useEffect(() => {
-    // setLoading(true);
     const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
     fetch(url)
       .then((res) => res.json())
@@ -25,7 +24,7 @@ const UpdateItem = () => {
           setUpdateItem(data)
         }
       });
-  }, [id]);
+  }, [id, item]);
   const handleUpdateName = event =>{
     const newName = event.target.value;
     const {name, ...rest}= updateItem;
@@ -59,28 +58,91 @@ const UpdateItem = () => {
   }
 const handleUpdate = async(event)=>{
   event.preventDefault();
-  const {_id}= item;
-  const data = await axios.put(`https://stark-dusk-04607.herokuapp.com/inventory/${_id}`,{updateItem});
-  if(!data.success) return toast.error(data.error, {
-    position: toast.POSITION.TOP_CENTER
-  })
+  // console.log(updateItem);
+  const setupdateItem ={
+    name:updateItem.name,
+    made:updateItem.made,
+    price:updateItem.price,
+    quantity:updateItem.quantity,
+    url:updateItem.url
+  }
+  
+    try{
+      const { data } = await axios.put(`http://localhost:5000/inventory/${id}`, setupdateItem);
+    
+    if (!data.success) {
+      return toast.error(data.error, {
+        position: toast.POSITION.TOP_CENTER
+      });
+        
+    }
+    if(data.success){
 
-  toast(data.message, {
-    position: toast.POSITION.TOP_CENTER
-  })
-  // console.log(data);
+    toast.success(data.message, {
+      position: toast.POSITION.TOP_CENTER
+    })}
+  }catch(error){
+    toast.error(error.message, {
+      position: toast.POSITION.TOP_CENTER
+    })
+    }
+   
+  
 }
+  const handleDelivery = async(event) => {
+    event.preventDefault();
+    const deliveryItem ={
+      name:item.name,
+      quantity:event.target.deliveryQuantity.value
+     
+    }
+    
+    try{
+      if(parseInt(item.quantity)>= event.target.deliveryQuantity.value && event.target.deliveryQuantity.value > 0){
 
-  const handleDelivery = () => {};
+        const { data } = await axios.put(`http://localhost:5000/delivery/${id}`, deliveryItem);
+      
+    
+    if (!data.success) {
+      return toast.error(data.error, {
+        position: toast.POSITION.TOP_CENTER
+      });
+        
+    }
+    if(data.success){
+
+    toast.success(data.message, {
+      position: toast.POSITION.TOP_CENTER
+    })}
+    event.target.reset();
+    setDError('')
+  }else{
+    setDError(`Your quantity not available, Available quantity ${item.quantity}`)
+  }
+  }catch(error){
+    toast.error(error.message, {
+      position: toast.POSITION.TOP_CENTER
+    })
+    }
+
+  };
 
   return (
-    <div className="add-area">
-      <h1 className=" text-4xl">Update your item</h1>
-      <div className="update-area">
-        <form    className="add-from" onClick={handleUpdate}>
-          <div className="input-fild">
-            <label>Item name</label>
-            <input onChange={handleUpdateName}
+<div>
+<h1 className=" text-orange-500 text-4xl text-center font-bold pt-10 uppercase">Manage your item</h1>
+<div class="text-center text-white">
+      <p class="p-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+    </div>
+<div class="hero min-h-screen">
+  <div>
+  <div class="hero-content flex-col lg:flex-row">
+  <form   onSubmit={handleUpdate}>
+      <h1 class="text-4xl font-bold py-5 text-white">Update item</h1>
+          <div className="form-control">
+          <label class="label">
+            <span class="label-text text-white">Name</span>
+          </label>
+            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateName}
               type="text"
               name="name"
               value={updateItem.name}
@@ -89,9 +151,11 @@ const handleUpdate = async(event)=>{
         
             />
           </div>
-          <div className="input-fild">
-            <label>Origin</label>
-            <input onChange={handleUpdateOrigin}
+          <div className="form-control ">
+          <label class="label">
+            <span class="label-text text-white">Origin</span>
+          </label>
+            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateOrigin}
               type="text"
               name="origin"
               value={updateItem.made}
@@ -100,9 +164,11 @@ const handleUpdate = async(event)=>{
              
             />
           </div>
-          <div className="input-fild">
-            <label>Quantity</label>
-            <input onChange={handleUpdateQuantity}
+          <div className="form-control ">
+          <label class="label">
+            <span class="label-text text-white">Quantity</span>
+          </label>
+            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateQuantity}
               type="number"
               name="quantity"
               value={updateItem.quantity}
@@ -110,9 +176,11 @@ const handleUpdate = async(event)=>{
               
             />
           </div>
-          <div className="input-fild">
-            <label>Price</label>
-            <input onChange={handleUpdatePrice}
+          <div className="form-control">
+          <label class="label">
+            <span class="label-text text-white">Price</span>
+          </label>
+            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdatePrice}
               type="number"
               name="price"
               value={updateItem.price}
@@ -121,9 +189,11 @@ const handleUpdate = async(event)=>{
               
             />
           </div>
-          <div className="input-fild">
-            <label>Image url</label>
-            <input  onChange={handleUpdateUrl}
+          <div className="form-control my-5">
+          <label class="label">
+            <span class="label-text text-white">Image URL</span>
+          </label>
+            <input class="w-96 input input-bordered bg-transparent border-white text-white"  onChange={handleUpdateUrl}
               type="url"
               name="url"
               value={updateItem.url}
@@ -132,38 +202,47 @@ const handleUpdate = async(event)=>{
               
             />
           </div>
-          <div className="button">
-            <input type="submit" value="Update" />
+          <div className="form-control">
+            <input class="btn btn-primary" type="submit" value="Update" />
           </div>
         </form>
-
-        <form onSubmit={handleDelivery} className="add-from">
-          <div className="input-fild">
-            <label>Item name</label>
-            <input
+    <div>
+    <form onSubmit={handleDelivery} className=" mt-10 ml-10">
+    <h1 class="text-4xl font-bold text-white">Delivery item</h1>
+          <div className="form-control">
+          <label class="label">
+            <span class="label-text text-white">Name</span>
+          </label>
+            <input class="w-96 input input-bordered bg-transparent border-white text-white"
               type="text"
               name="name"
               value={item.name}
             />
           </div>
 
-          <div className="input-fild">
-            <label> Delivery quantity</label>
-            <input
+          <div className="form-control">
+            <label class="label"> 
+            <span class="label-text text-white">Delivery quantity</span>
+            </label>
+            <input class="w-96 input input-bordered bg-transparent border-white text-white"
               type="number"
-              name="quantity"
+              name="deliveryQuantity"
               placeholder="Enter your delivery quantity"
               required
               autoComplete="off"
             />
+           {dError?  <span className=" text-error">{dError}</span>:''}
           </div>
 
-          <div className="button">
-            <input type="submit" value="Delivery Item" />
+          <div className="form-control">
+            <input class="btn btn-primary mt-6 "type="submit" value="Delivery Item" />
           </div>
         </form>
-      </div>
     </div>
+  </div>
+  </div>
+</div>
+</div>
   );
 };
 

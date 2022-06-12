@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ManageItemInfo from "./ManageItemInfo";
 
 const Home = () => {
-  const [items] = AllItem([]);
+  const [items] = AllItem();
   const sixItems = items.slice(-6);
 const naviget = useNavigate()
   console.log(sixItems);

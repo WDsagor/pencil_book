@@ -1,9 +1,0 @@
-.loading{
-   display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.loading .image{
-    margin: auto;
-    width: 150px;
-}
