@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import "./Signup.css";
 import SocialLogin from "../../SocialLogin/SocialLogin";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 const Signup = () => {
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, upError] = useUpdateProfile(auth);
     const navigate = useNavigate()
 
   if (loading) {
@@ -23,7 +24,7 @@ const Signup = () => {
   }
   const handelSignup = async (event) => {
     event.preventDefault();
-    // const name = event.target.name.value;
+    const displayName = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPass = event.target.confirmPass.value;
@@ -34,6 +35,7 @@ const Signup = () => {
       password.length >= 6
     ) {
       await createUserWithEmailAndPassword(email, password);
+      await updateProfile({displayName});
       toast.success(
         "Registration complete please see email, confirm varification link ",
         {
@@ -65,6 +67,7 @@ const Signup = () => {
                 type="text"
                 name="name"
                 placeholder="Enter your full name"
+                required
               />
             </span>
           </div>

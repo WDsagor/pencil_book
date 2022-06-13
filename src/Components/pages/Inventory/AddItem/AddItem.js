@@ -2,11 +2,16 @@ import React from "react";
 import axios from "axios";
 import "./AddItem.css";
 import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../firebase.init";
 
 const AddItem = () => {
+  const [user] = useAuthState(auth)
   const handleAdd = async (event) => {
     event.preventDefault();
     const items = {
+      user: user.displayName,
+      email: user.email,
       name: event.target.name.value,
       made: event.target.origin.value,
       price: event.target.price.value,

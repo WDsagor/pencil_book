@@ -4,12 +4,35 @@ import axios from "axios";
 import AllItem from "../../../useHooks/useHooks";
 import "./MyItem.css";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { useEffect } from "react";
+import { useState } from "react";
+import NotAdded from "./NotAdded";
 
 const MyItem = () => {
-  const [items, setItems] = AllItem();
+  const [items, setItems] = useState([]);
+  const [user] = useAuthState(auth)
   const naviget = useNavigate()
 
+  useEffect(()=>{
+    const url = `http://localhost:5000/inventory/${user?.email}`
+    fetch(url).then(res=> res.json()).then(data=>  setItems(data))
+  }, [user?.email])
+
+
+
+
+  if(items.length === 0){
+    return <NotAdded></NotAdded>
+  }
+  
+  // if(itemLoading){
+  //   return <Loading></Loading>
+  // }
 const deleteItem = id =>{
+ 
   const confirm = window.confirm("Are you sure to delete this item ?")
   if(confirm){
     (async () => {
@@ -33,7 +56,8 @@ const itemUpdate = id =>{
 } 
   return (
     <div className="items">
-      <h2>Manage your item</h2>
+      <h1 className="text-4xl uppercase font-bold">Manage your item</h1>
+      <h2 className="text-lg uppercase pb-7 ">You can Manage your item's Update, delete, modify</h2>
       <table>
         <thead>
           <tr>

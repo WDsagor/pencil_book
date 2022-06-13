@@ -4,6 +4,7 @@ import  { useEffect, useState } from "react";
 
 const AllItem = () => {
     const [items, setItems] = useState([]);
+    const [itemLoading, setItemLoading ] = useState(true)
 //     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("https://stark-dusk-04607.herokuapp.com/inventory"
 //     ).then((res) => setItems(res.data))
 //   );
@@ -11,8 +12,11 @@ const AllItem = () => {
     useEffect ( () => {
         fetch("https://stark-dusk-04607.herokuapp.com/inventory")
         .then(res => res.json())
-        .then(data => setItems(data));
+        .then(data => {
+            setItems(data)
+            setItemLoading(false)
+        });
     }, [])
-    return [items, setItems];
+    return [items, setItems, itemLoading];
 }
 export default AllItem;

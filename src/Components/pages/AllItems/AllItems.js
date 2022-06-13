@@ -1,7 +1,7 @@
 import React from "react";
 
 const AllItems = ({ item }) => {
-  const { name, quantity, price, made, url } = item;
+  const { name, quantity, price, url, user } = item;
   console.log(item);
   return (
     <tr>
@@ -9,7 +9,7 @@ const AllItems = ({ item }) => {
       <td>{name}</td>
       <td>{quantity}</td>
       <td>{price}</td>
-      <td>{made}</td>
+      <td>{user}</td>
     </tr>
   );
 };

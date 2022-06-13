@@ -2,28 +2,27 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Loading from "../../Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const UpdateItem = () => {
+  const [user] = useAuthState(auth)
   const [dError, setDError] = useState("")
   const [item, setItem] = useState({});
   const [updateItem, setUpdateItem] = useState({});
   const {id}  = useParams();
 
-
+ 
+  
   useEffect(() => {
     const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if(!data){
-          return <Loading></Loading>
-        }else{
-          
-          setItem(data);
+        setItem(data);
           setUpdateItem(data)
-        }
-      });
+          
+        });
   }, [id, item]);
   const handleUpdateName = event =>{
     const newName = event.target.value;
@@ -60,6 +59,8 @@ const handleUpdate = async(event)=>{
   event.preventDefault();
   // console.log(updateItem);
   const setupdateItem ={
+    user: user.displayName,
+    email: user.email,
     name:updateItem.name,
     made:updateItem.made,
     price:updateItem.price,
@@ -130,19 +131,19 @@ const handleUpdate = async(event)=>{
   return (
 <div>
 <h1 className=" text-orange-500 text-4xl text-center font-bold pt-10 uppercase">Manage your item</h1>
-<div class="text-center text-white">
-      <p class="p-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+<div className="text-center text-white">
+      <p className="p-6 w-1/2 mx-auto uppercase text-slate-400">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
     </div>
-<div class="hero min-h-screen">
+<div className="hero min-h-screen">
   <div>
-  <div class="hero-content flex-col lg:flex-row">
+  <div className="hero-content flex-col lg:flex-row">
   <form   onSubmit={handleUpdate}>
-      <h1 class="text-4xl font-bold py-5 text-white">Update item</h1>
+      <h1 className="text-4xl font-bold py-5 text-white">Update item</h1>
           <div className="form-control">
-          <label class="label">
-            <span class="label-text text-white">Name</span>
+          <label className="label">
+            <span className="label-text text-white">Name</span>
           </label>
-            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateName}
+            <input className="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateName}
               type="text"
               name="name"
               value={updateItem.name}
@@ -152,10 +153,10 @@ const handleUpdate = async(event)=>{
             />
           </div>
           <div className="form-control ">
-          <label class="label">
-            <span class="label-text text-white">Origin</span>
+          <label className="label">
+            <span className="label-text text-white">Origin</span>
           </label>
-            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateOrigin}
+            <input className="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateOrigin}
               type="text"
               name="origin"
               value={updateItem.made}
@@ -165,10 +166,10 @@ const handleUpdate = async(event)=>{
             />
           </div>
           <div className="form-control ">
-          <label class="label">
-            <span class="label-text text-white">Quantity</span>
+          <label className="label">
+            <span className="label-text text-white">Quantity</span>
           </label>
-            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateQuantity}
+            <input className="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdateQuantity}
               type="number"
               name="quantity"
               value={updateItem.quantity}
@@ -177,10 +178,10 @@ const handleUpdate = async(event)=>{
             />
           </div>
           <div className="form-control">
-          <label class="label">
-            <span class="label-text text-white">Price</span>
+          <label className="label">
+            <span className="label-text text-white">Price</span>
           </label>
-            <input class="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdatePrice}
+            <input className="w-full input input-bordered bg-transparent border-white text-white" onChange={handleUpdatePrice}
               type="number"
               name="price"
               value={updateItem.price}
@@ -190,10 +191,10 @@ const handleUpdate = async(event)=>{
             />
           </div>
           <div className="form-control my-5">
-          <label class="label">
-            <span class="label-text text-white">Image URL</span>
+          <label className="label">
+            <span className="label-text text-white">Image URL</span>
           </label>
-            <input class="w-96 input input-bordered bg-transparent border-white text-white"  onChange={handleUpdateUrl}
+            <input className="w-96 input input-bordered bg-transparent border-white text-white"  onChange={handleUpdateUrl}
               type="url"
               name="url"
               value={updateItem.url}
@@ -203,17 +204,17 @@ const handleUpdate = async(event)=>{
             />
           </div>
           <div className="form-control">
-            <input class="btn btn-primary" type="submit" value="Update" />
+            <input className="btn btn-primary" type="submit" value="Update" />
           </div>
         </form>
     <div>
-    <form onSubmit={handleDelivery} className=" mt-10 ml-10">
-    <h1 class="text-4xl font-bold text-white">Delivery item</h1>
+    <form onSubmit={handleDelivery} className=" mt-10 lg:ml-10">
+    <h1 className="text-4xl font-bold text-white">Delivery item</h1>
           <div className="form-control">
-          <label class="label">
-            <span class="label-text text-white">Name</span>
+          <label className="label">
+            <span className="label-text text-white">Name</span>
           </label>
-            <input class="w-96 input input-bordered bg-transparent border-white text-white"
+            <input className="w-96 input input-bordered bg-transparent border-white text-white"
               type="text"
               name="name"
               value={item.name}
@@ -221,10 +222,10 @@ const handleUpdate = async(event)=>{
           </div>
 
           <div className="form-control">
-            <label class="label"> 
-            <span class="label-text text-white">Delivery quantity</span>
+            <label className="label"> 
+            <span className="label-text text-white">Delivery quantity</span>
             </label>
-            <input class="w-96 input input-bordered bg-transparent border-white text-white"
+            <input className="w-96 input input-bordered bg-transparent border-white text-white"
               type="number"
               name="deliveryQuantity"
               placeholder="Enter your delivery quantity"
@@ -235,7 +236,7 @@ const handleUpdate = async(event)=>{
           </div>
 
           <div className="form-control">
-            <input class="btn btn-primary mt-6 "type="submit" value="Delivery Item" />
+            <input className="btn btn-primary mt-6 "type="submit" value="Delivery Item" />
           </div>
         </form>
     </div>
