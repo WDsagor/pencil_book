@@ -6,6 +6,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ManageItemInfo from "./ManageItemInfo";
 import Loading from "../../Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const [items,setItems, itemLoading] = AllItem();
@@ -16,6 +17,9 @@ const naviget = useNavigate()
   }else{
     return (
       <div className="">
+        <Helmet>
+    <title>Home - PENCIL BOOK</title>
+  </Helmet>
         <Carosol></Carosol>
   
         <div className="py-12 px-6">

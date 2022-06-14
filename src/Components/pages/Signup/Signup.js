@@ -7,11 +7,14 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-fireb
 import auth from "../../../firebase.init";
 import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
+import useToken from "../../../useHooks/useToken";
 
 const Signup = () => {
-  const [createUserWithEmailAndPassword, loading, error] =
+  const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, upError] = useUpdateProfile(auth);
+    const [token] = useToken(user);
     const navigate = useNavigate()
 
   if (loading) {
@@ -43,7 +46,9 @@ const Signup = () => {
           autoClose: false,
         }
       );
-      return navigate('/login')
+      if(token){
+        return navigate('/login')
+      }
     }
     if (confirmPass.length < 6 && password.length < 6) {
       toast.error("Please enter passwor minimum 6 character");
@@ -56,13 +61,16 @@ const Signup = () => {
   };
   return (
     <div className="signup-page">
+      <Helmet>
+    <title> Sign Up - PENCIL BOOK</title>
+  </Helmet>
       <div className="signup-area">
-        <h1>Please signup</h1>
+        <h1 className=" text-2xl font-bold uppercase text-center pt-10 pb-5">Please signup</h1>
         <form onSubmit={handelSignup} className="signup-from">
           <div className="input-fild">
             <label>Full name</label>
             <span>
-              <FaUser className="icon"></FaUser>
+              <FaUser className="icon mt-1"></FaUser>
               <input
                 type="text"
                 name="name"
@@ -74,7 +82,7 @@ const Signup = () => {
           <div className="input-fild">
             <label>Email</label>
             <span>
-              <FaEnvelope className="icon"></FaEnvelope>
+              <FaEnvelope className="icon mt-1"></FaEnvelope>
               <input
                 type="email"
                 name="email"
@@ -86,7 +94,7 @@ const Signup = () => {
           <div className="input-fild">
             <label>Password</label>
             <span>
-              <FaLock className="icon"></FaLock>
+              <FaLock className="icon mt-1"></FaLock>
               <input
                 type="password"
                 name="password"
@@ -98,7 +106,7 @@ const Signup = () => {
           <div className="input-fild">
             <label>Confirm password</label>
             <span>
-              <FaLock className="icon"></FaLock>
+              <FaLock className="icon mt-1"></FaLock>
               <input
                 type="password"
                 name="confirmPass"

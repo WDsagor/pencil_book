@@ -4,6 +4,7 @@ import "./AddItem.css";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.init";
+import { Helmet } from "react-helmet-async";
 
 const AddItem = () => {
   const [user] = useAuthState(auth)
@@ -21,7 +22,12 @@ const AddItem = () => {
     // console.log(items);
 
     try {
-      const { data } = await axios.post("https://stark-dusk-04607.herokuapp.com/inventory", items);
+      const { data } = await axios.post("http://localhost:5000/inventory", items, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
 
       if (!data.success) {
         return toast.error(data.error, {
@@ -44,6 +50,9 @@ const AddItem = () => {
   };
   return (
     <div className="add-area">
+      <Helmet>
+    <title> Add item - PENCIL BOOK</title>
+  </Helmet>
       <h1>Add your item</h1>
       <form onSubmit={handleAdd} className="add-from">
         <div className="input-fild">

@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
+import NotFound from "./Components/NotFound";
 import Home from "./Components/pages/Home/Home";
 import AddItem from "./Components/pages/Inventory/AddItem/AddItem";
 import Inventory from "./Components/pages/Inventory/Inventory";
@@ -64,6 +65,7 @@ function App() {
         ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer className='foorer'></Footer>
     </div>

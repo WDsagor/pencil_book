@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import AllItem from "../../../useHooks/useHooks";
 import Loading from "../../Loading/Loading";
 import AllItems from "../AllItems/AllItems";
@@ -11,8 +12,11 @@ const Inventory = () => {
   }
   return (
     <div className="items">
+      <Helmet>
+    <title> Inventory - PENCIL BOOK</title>
+  </Helmet>
       <h1 className=" text-4xl font-bold uppercase">Inventory</h1>
-      <h1 className=" text-xl uppercase">{items.length} Added Here </h1>
+      <h1 className=" text-xl uppercase">{items.length} Items Total </h1>
       <table>
         <thead>
           <tr>

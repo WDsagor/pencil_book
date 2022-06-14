@@ -2,20 +2,16 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
+import { Helmet } from "react-helmet-async";
 
 const UpdateItem = () => {
-  const [user] = useAuthState(auth)
   const [dError, setDError] = useState("")
   const [item, setItem] = useState({});
   const [updateItem, setUpdateItem] = useState({});
   const {id}  = useParams();
-
- 
   
   useEffect(() => {
-    const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
+    const url = `http://localhost:5000/inventory/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -23,7 +19,7 @@ const UpdateItem = () => {
           setUpdateItem(data)
           
         });
-  }, [id, item]);
+  }, [id]);
   const handleUpdateName = event =>{
     const newName = event.target.value;
     const {name, ...rest}= updateItem;
@@ -59,8 +55,6 @@ const handleUpdate = async(event)=>{
   event.preventDefault();
   // console.log(updateItem);
   const setupdateItem ={
-    user: user.displayName,
-    email: user.email,
     name:updateItem.name,
     made:updateItem.made,
     price:updateItem.price,
@@ -69,7 +63,12 @@ const handleUpdate = async(event)=>{
   }
   
     try{
-      const { data } = await axios.put(`http://localhost:5000/inventory/${id}`, setupdateItem);
+      const { data } = await axios.put(`http://localhost:5000/inventory/${id}`, setupdateItem, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
     
     if (!data.success) {
       return toast.error(data.error, {
@@ -101,7 +100,12 @@ const handleUpdate = async(event)=>{
     try{
       if(parseInt(item.quantity)>= event.target.deliveryQuantity.value && event.target.deliveryQuantity.value > 0){
 
-        const { data } = await axios.put(`http://localhost:5000/delivery/${id}`, deliveryItem);
+        const { data } = await axios.put(`http://localhost:5000/delivery/${id}`, deliveryItem, {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
       
     
     if (!data.success) {
@@ -130,6 +134,9 @@ const handleUpdate = async(event)=>{
 
   return (
 <div>
+  <Helmet>
+    <title> Update item - PENCIL BOOK</title>
+  </Helmet>
 <h1 className=" text-orange-500 text-4xl text-center font-bold pt-10 uppercase">Manage your item</h1>
 <div className="text-center text-white">
       <p className="p-6 w-1/2 mx-auto uppercase text-slate-400">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>

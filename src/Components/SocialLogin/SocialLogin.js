@@ -3,16 +3,18 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { FaFacebookSquare, FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import useToken from "../../useHooks/useToken";
 import Loading from "../Loading/Loading";
 import "./SocialLogin.css";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading] = useSignInWithGoogle(auth);
+  const [token] = useToken(user);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
     
   }
@@ -25,15 +27,12 @@ const SocialLogin = () => {
 
 
   return (
-    <div className="social-btn-area">
-      <button onClick={() => signInWithGoogle()} className="social-btn">
-        <FaGoogle className="google"></FaGoogle>
-        <span> Google sigin</span>
+    <div className="py-10 ">
+      <button onClick={() => signInWithGoogle()} className=" flex justify-center align-middle btn normal-case bg-transparent w-full">
+        <FaGoogle className="font-bold text-2xl pr-2 text-green-400"></FaGoogle>
+        <span className="text-lg"> Google sigin</span>
       </button>
-      <button className="social-btn">
-        <FaFacebookSquare></FaFacebookSquare> <span> Facebook sigin</span>
-      </button>
-    </div>
+      </div>
   );
 };
 

@@ -8,15 +8,18 @@ import auth from "../../../firebase.init";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../../Loading/Loading";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
+import useToken from "../../../useHooks/useToken";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
 
@@ -50,13 +53,16 @@ const Login = () => {
 
   return (
     <div className="login-page">
+      <Helmet>
+    <title> Log In - PENCIL BOOK</title>
+  </Helmet>
       <div className="login-area">
-        <h1>Please Login</h1>
+        <h1 className=" text-2xl font-bold uppercase text-center pt-10 pb-5">Please Login</h1>
         <form onSubmit={handelLogin} className="login-from">
           <div className="input-fild">
             <label>Eamil</label>
-            <span>
-              <FaEnvelope className="icon"></FaEnvelope>
+            <span className=" flex align-middle">
+              <FaEnvelope className="icon mt-1"></FaEnvelope>
               <input
                 type="email"
                 name="email"
@@ -64,10 +70,11 @@ const Login = () => {
               />
             </span>
           </div>
+          
           <div className="input-fild">
             <label>Password</label>
             <span>
-              <FaLock className="icon"></FaLock>
+              <FaLock className="icon mt-1"></FaLock>
               <input
                 type="password"
                 name="password"
@@ -79,7 +86,7 @@ const Login = () => {
             <input type="submit" value="Log in" />
           </div>
         </form>
-        <p>
+        <p className="py-2">
           Are you new?
           <Link className="link" to="/signup">
             Create account
