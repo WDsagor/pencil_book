@@ -12,7 +12,13 @@ const UpdateItem = () => {
   
   useEffect(() => {
     const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
-    fetch(url)
+    fetch(url,{
+      method: 'GET',
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setItem(data);
