@@ -5,12 +5,12 @@ import  { useEffect, useState } from "react";
 const AllItem = () => {
     const [items, setItems] = useState([]);
     const [itemLoading, setItemLoading ] = useState(true)
-//     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("http://localhost:5000/inventory"
+//     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("https://stark-dusk-04607.herokuapp.com/inventory"
 //     ).then((res) => setItems(res.data))
 //   );
 
     useEffect ( () => {
-        fetch("http://localhost:5000/inventory",{
+        fetch("https://stark-dusk-04607.herokuapp.com/inventory",{
             method: 'GET',
             headers: {
               "content-type": "application/json",

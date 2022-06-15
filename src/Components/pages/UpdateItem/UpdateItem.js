@@ -11,7 +11,7 @@ const UpdateItem = () => {
   const {id}  = useParams();
   
   useEffect(() => {
-    const url = `http://localhost:5000/inventory/${id}`;
+    const url = `https://stark-dusk-04607.herokuapp.com/inventory/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -63,7 +63,7 @@ const handleUpdate = async(event)=>{
   }
   
     try{
-      const { data } = await axios.put(`http://localhost:5000/inventory/${id}`, setupdateItem, {
+      const { data } = await axios.put(`https://stark-dusk-04607.herokuapp.com/inventory/${id}`, setupdateItem, {
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -100,7 +100,7 @@ const handleUpdate = async(event)=>{
     try{
       if(parseInt(item.quantity)>= event.target.deliveryQuantity.value && event.target.deliveryQuantity.value > 0){
 
-        const { data } = await axios.put(`http://localhost:5000/delivery/${id}`, deliveryItem, {
+        const { data } = await axios.put(`https://stark-dusk-04607.herokuapp.com/delivery/${id}`, deliveryItem, {
           headers: {
             "content-type": "application/json",
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

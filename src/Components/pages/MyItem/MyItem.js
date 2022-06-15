@@ -17,7 +17,7 @@ const MyItem = () => {
   const naviget = useNavigate();
 
   useEffect(() => {
-    const url = `http://localhost:5000/myitems/${user?.email}`;
+    const url = `https://stark-dusk-04607.herokuapp.com/myitems/${user?.email}`;
     fetch(url, {
       method: 'GET',
       headers: {
@@ -41,7 +41,7 @@ const MyItem = () => {
     if (confirm) {
       (async () => {
         const { data } = await axios.delete(
-          `http://localhost:5000/inventory/${id}`,{
+          `https://stark-dusk-04607.herokuapp.com/inventory/${id}`,{
             headers: {
               "content-type": "application/json",
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
