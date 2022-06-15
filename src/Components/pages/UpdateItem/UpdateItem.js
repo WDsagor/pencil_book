@@ -230,7 +230,7 @@ const handleUpdate = async(event)=>{
             <input className="w-96 input input-bordered bg-transparent border-white text-white"
               type="text"
               name="name"
-              value={item.name}
+              value={item.name} readOnly
             />
           </div>
 
