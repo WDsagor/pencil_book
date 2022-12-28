@@ -9,7 +9,7 @@ import Loading from "../../Loading/Loading";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => {
-  const [items,setItems, itemLoading] = AllItem();
+  const [items, setItems, itemLoading] = AllItem();
   const sixItems = items.slice(-6);
 const naviget = useNavigate()
   if(itemLoading){

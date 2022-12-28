@@ -17,9 +17,9 @@ const MyItem = () => {
   const naviget = useNavigate();
 
   useEffect(() => {
-    const url = `https://stark-dusk-04607.herokuapp.com/myitems/${user?.email}`;
+    const url = `https://stationery-inventory-management-server-wdsagor.vercel.app/myitems/${user?.email}`;
     fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -41,7 +41,8 @@ const MyItem = () => {
     if (confirm) {
       (async () => {
         const { data } = await axios.delete(
-          `https://stark-dusk-04607.herokuapp.com/inventory/${id}`,{
+          `https://stationery-inventory-management-server-wdsagor.vercel.app/inventory/${id}`,
+          {
             headers: {
               "content-type": "application/json",
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -68,8 +69,8 @@ const MyItem = () => {
   return (
     <div className="items">
       <Helmet>
-    <title>My Items - PENCIL BOOK</title>
-  </Helmet>
+        <title>My Items - PENCIL BOOK</title>
+      </Helmet>
       <h1 className="text-4xl uppercase font-bold">Manage your item</h1>
       <h2 className="text-lg uppercase pb-7 ">
         You can Manage your item's Update, delete, modify
@@ -97,14 +98,12 @@ const MyItem = () => {
                 <td>
                   <button
                     className="updateBtn"
-                    onClick={() => itemUpdate(item?._id)}
-                  >
+                    onClick={() => itemUpdate(item?._id)}>
                     Update
                   </button>{" "}
                   <button
                     className="deleteBtn"
-                    onClick={() => deleteItem(item?._id)}
-                  >
+                    onClick={() => deleteItem(item?._id)}>
                     Delete
                   </button>
                 </td>
