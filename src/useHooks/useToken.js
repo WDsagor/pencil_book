@@ -11,7 +11,7 @@ const useToken = (user) => {
     if (email) {
       (async () => {
         const { data } = await axios.put(
-          `https://stationery-inventory-management-server-wdsagor.vercel.app/user/${email}`,
+          `pencilbookserver.up.railway.app/user/${email}`,
           currentUser
         );
         const accessToken = data.accessToken;

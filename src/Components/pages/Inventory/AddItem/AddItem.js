@@ -23,7 +23,7 @@ const AddItem = () => {
 
     try {
       const { data } = await axios.post(
-        "https://stationery-inventory-management-server-wdsagor.vercel.app/inventory",
+        "pencilbookserver.up.railway.app/inventory",
         items,
         {
           headers: {

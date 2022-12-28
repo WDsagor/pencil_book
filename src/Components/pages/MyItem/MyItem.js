@@ -17,7 +17,7 @@ const MyItem = () => {
   const naviget = useNavigate();
 
   useEffect(() => {
-    const url = `https://stationery-inventory-management-server-wdsagor.vercel.app/myitems/${user?.email}`;
+    const url = `pencilbookserver.up.railway.app/myitems/${user?.email}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -41,7 +41,7 @@ const MyItem = () => {
     if (confirm) {
       (async () => {
         const { data } = await axios.delete(
-          `https://stationery-inventory-management-server-wdsagor.vercel.app/inventory/${id}`,
+          `pencilbookserver.up.railway.app/inventory/${id}`,
           {
             headers: {
               "content-type": "application/json",

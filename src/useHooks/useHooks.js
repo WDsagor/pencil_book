@@ -5,21 +5,18 @@ import { useEffect, useState } from "react";
 const AllItem = () => {
   const [items, setItems] = useState([]);
   const [itemLoading, setItemLoading] = useState(true);
-  //     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("https://stationery-inventory-management-server-wdsagor.vercel.app/inventory"
+  //     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("pencilbookserver.up.railway.app/inventory"
   //     ).then((res) => setItems(res.data))
   //   );
 
   useEffect(() => {
-    fetch(
-      "https://stationery-inventory-management-server-wdsagor.vercel.app/inventory",
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch("pencilbookserver.up.railway.app/inventory", {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
