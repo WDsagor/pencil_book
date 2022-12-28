@@ -11,7 +11,7 @@ const UpdateItem = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const url = `pencilbookserver.up.railway.app/inventory/${id}`;
+    const url = `https://pencilbookserver.up.railway.app/inventory/${id}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -68,7 +68,7 @@ const UpdateItem = () => {
 
     try {
       const { data } = await axios.put(
-        `pencilbookserver.up.railway.app/inventory/${id}`,
+        `https://pencilbookserver.up.railway.app/inventory/${id}`,
         setupdateItem,
         {
           headers: {
@@ -107,7 +107,7 @@ const UpdateItem = () => {
         event.target.deliveryQuantity.value > 0
       ) {
         const { data } = await axios.put(
-          `pencilbookserver.up.railway.app/delivery/${id}`,
+          `https://pencilbookserver.up.railway.app/delivery/${id}`,
           deliveryItem,
           {
             headers: {

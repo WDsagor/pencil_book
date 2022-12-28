@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 const AllItem = () => {
   const [items, setItems] = useState([]);
   const [itemLoading, setItemLoading] = useState(true);
-  //     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("pencilbookserver.up.railway.app/inventory"
+  //     const { isLoading, error, data, isFetching } = useQuery("repoData", () =>axios.get("https://pencilbookserver.up.railway.app/inventory"
   //     ).then((res) => setItems(res.data))
   //   );
 
   useEffect(() => {
-    fetch("pencilbookserver.up.railway.app/inventory", {
+    fetch("https://pencilbookserver.up.railway.app/inventory", {
       method: "GET",
       headers: {
         "content-type": "application/json",
