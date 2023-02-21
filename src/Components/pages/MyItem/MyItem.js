@@ -29,7 +29,7 @@ const MyItem = () => {
       .then((data) => setItems(data));
   }, [user?.email]);
 
-  if (items.length === 0) {
+  if (items?.length === 0) {
     return <NotAdded></NotAdded>;
   }
 
