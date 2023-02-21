@@ -86,7 +86,7 @@ const MyItem = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
+          {items?.map((item) => {
             return (
               <tr key={item._id}>
                 <td>
